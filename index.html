@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interior Design Products and Services</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+        
+        .card {
+            width: 300px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            overflow: hidden;
+            transition: transform 0.3s;
+            border: 2px solid #333; /* Double border */
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .card-content {
+            padding: 20px;
+        }
+        
+        /* Each detail has a different dark color */
+        .product-name { color: #990000; } /* Red */
+        .product-price { color: #003366; } /* Dark Blue */
+        .product-detail { color: #006600; } /* Dark Green */
+
+        /* Limit image width */
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Interior Design Products and Services</h1>
+
+    <div class="container" id="product-container">
+        <!-- Products will be displayed here -->
+    </div>
+
+    <script>
+        fetch('/products')
+            .then(response => response.json())
+            .then(data => {
+                const container = document.getElementById('product-container');
+                data.forEach((product, index) => {
+                    const card = document.createElement('div');
+                    card.className = 'card';
+                    
+                    const cardContent = document.createElement('div');
+                    cardContent.className = 'card-content';
+
+                    const name = document.createElement('div');
+                    name.className = 'product-name';
+                    name.innerText = product.name;
+
+                    const price = document.createElement('div');
+                    price.className = 'product-price';
+                    price.innerText = 'Price: ' + product.price;
+
+                    const description = document.createElement('div');
+                    description.className = 'product-detail';
+                    description.innerText = 'Details: ' + product.description;
+
+                    const image = document.createElement('img');
+                    switch (index) {
+                        case 0:
+                            image.src = 'https://www.nipponpaint.co.in/wp-content/uploads/2019/12/home-interior-wall-design-1024x683.jpg';
+                            image.alt = 'Interior Designer Wall Painting';
+                            break;
+                        case 1:
+                            image.src = 'https://5.imimg.com/data5/SELLER/Default/2022/8/YU/TQ/NX/7642058/office-painting-work-1000x1000.jpg';
+                            image.alt = 'Corporate Office Painting Works';
+                            break;
+                        case 2:
+                            image.src = 'https://image.made-in-china.com/2f0j00OMzUCELnbcqf/10-off-Luxury-Foshan-Custom-CEO-Table-Office-Wooden-Table-Executive-Desk-Modern-Office-Furniture.webp';
+                            image.alt = 'Luxury Foshan Custom CEO Table';
+                            break;
+                        case 3:
+                            image.src = 'https://image.made-in-china.com/202f0j00rBAGgYyFlmbI/Two-Persons-Modular-Office-Cabin-Partition-Table-for-Sale.webp';
+                            image.alt = 'Modular Office Cabin Partition Table';
+                            break;
+                        case 4:
+                            image.src = 'https://img.archiexpo.com/images_ae/photo-mg/88131-16973467.jpg';
+                            image.alt = 'ArchiExpo Office Furniture';
+                            break;
+                        case 5:
+                            image.src = 'https://www.tirupatioffice.com/file_upload/product/1600669083-3eb9818155ad351dcf6598d2909b8260-12.jpg';
+                            image.alt = 'Tirupati Office Furniture';
+                            break;
+                        case 6:
+                            image.src = 'https://www.jiomart.com/images/product/original/rv1eqhsas6/roar-wood-high-back-grey-white-combination-leatherette-office-executive-revolving-chair-product-images-orv1eqhsas6-p594493168-0-202210150350.jpg?im=Resize=(1000,1000)';
+                            image.alt = 'Roar Wood High Back Chair';
+                            break;
+                        case 7:
+                            image.src = 'https://stancephilippines.com/cdn/shop/products/2-Staff-Cubicle-Office-Workstation_670x543.png?v=1675303690';
+                            image.alt = 'Staff Cubicle Office Workstation';
+                            break;
+                        default:
+                            break;
+                    }
+                    
+                    cardContent.appendChild(name);
+                    cardContent.appendChild(price);
+                    cardContent.appendChild(description);
+                    card.appendChild(cardContent);
+                    card.appendChild(image);
+                    container.appendChild(card);
+                });
+            });
+    </script>
+</body>
+</html>
